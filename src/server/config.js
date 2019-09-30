@@ -4,6 +4,8 @@ const exphbs = require('express-handlebars');
 const morgan = require('morgan');
 const multer = require('multer');
 const express = require('express');
+
+const errorHandler = require('../routes/index');
 const routes = require('../routes/index');
 
 
@@ -12,7 +14,7 @@ module.exports = app => {
     //Settings
 
     //Especifico el puerto a utilizar
-    app.set('port', process.env.PORT || 3000);
+    app.set('port', process.env.PORT || 4000);
     //Digo donde estan las vistas
     app.set('views', path.join(__dirname, 'views'));
     app.engine('.hbs', exphbs({
@@ -42,8 +44,14 @@ module.exports = app => {
     //Routes
     routes(app);
     app.use
-    //ErrorHandlers
 
+    //Static Files
+
+    app.use('/public', express.static(path.join(__dirname, '../public')))
+    //ErrorHandlers
+    if ('development' === app.get('env')){
+        app.use(errorHandler);
+    }
 
 
     return app;
