@@ -11,7 +11,6 @@ const { Image } = require('../models');
 ctrl.index = (req, res) => {
     res.send('index')
 };
-
 ctrl.create =  (req, res) => {
 
     const  saveImage = async() => {
