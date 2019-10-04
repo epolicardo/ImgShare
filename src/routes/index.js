@@ -13,7 +13,5 @@ module.exports = app => {
     router.get('/images/:image_id/comment', image.comment);
     router.delete('/images/:image_id', image.remove);
     
-    
-    
     app.use(router);
 };
