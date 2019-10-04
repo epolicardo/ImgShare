@@ -59,4 +59,4 @@ typings/
 
 # next.js build output
 .next
-src/public/upload/
+#src/public/upload/
