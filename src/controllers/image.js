@@ -8,8 +8,10 @@ const fs = require('fs-extra');
 const { Image } = require('../models');
 
 
-ctrl.index = (req, res) => {
-    res.send('index')
+ctrl.index = async (req, res) => {
+ const image = await Image.findOne({filename: {$regex: req.params.image_id}});
+console.log(image);
+    res.render('image', {image});
 };
 ctrl.create =  (req, res) => {
 
@@ -34,7 +36,7 @@ ctrl.create =  (req, res) => {
                 description: req.body.description,
             })
             const imageSaved = await newImage.save();
-            res.send('Works');
+            res.redirect('/images/'+imgUrl);
         
             } else {
                 await fs.unlink(imageTempPath);
@@ -52,6 +54,8 @@ ctrl.like = (req, res) => {
 };
 
 ctrl.comment = (req, res) => {
+    console.log(req.body);
+    res.send("comment"); 
 
 };
 
