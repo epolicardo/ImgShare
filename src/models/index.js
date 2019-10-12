@@ -1,8 +1,8 @@
 
 module.exports= {
 
-    Image: require('./image')
-    //User: require('./image')
+    Image: require('./image'),
+    Comment: require('./comment' )
    // Image: require('./image')
     //Image: require('./image')
 
