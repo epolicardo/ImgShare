@@ -10,7 +10,7 @@ const { Image, Comment } = require('../models');
 
 //Controlador encargado de mostrar la vista inicial
 ctrl.index = async (req, res) => {
-    const viewModel = { image: {}, coments: {} };
+    const viewModel = { image: {}, comments: {} };
 
     const image = await Image.findOne({ filename: { $regex: req.params.image_id } });
     if (image) {
@@ -18,15 +18,15 @@ ctrl.index = async (req, res) => {
         viewModel.image = image;
         await image.save();
         const comments = await Comment.find({ image_id: image._id })
-        viewModel.coments = comments;
-        res.render('image', { viewModel });
+        viewModel.comments = comments;
+        res.render('image', viewModel);
     } else {
         res.redirect('/');
     }
 };
 
 //Controlador encargado de crear una nueva imagen.
-ctrl.create = (req, res) => {
+ctrl.create = async (req, res) => {
 
     const saveImage = async () => {
         const imgUrl = randomNumber();
@@ -62,8 +62,15 @@ ctrl.create = (req, res) => {
 
 };
 
-ctrl.like = (req, res) => {
-
+ctrl.like = async (req, res) => {
+    const image = await Image.findOne({ filename: { $regex: req.params.image_id } })
+    if (image) {
+        image.likes = image.likes + 1;
+        await image.save();
+        res.json({ likes: image.likes });
+    }else{
+res.status(500).json({error:'Internal error'});
+    }
 };
 
 ctrl.comment = async (req, res) => {
@@ -84,7 +91,13 @@ ctrl.comment = async (req, res) => {
 
 };
 
-ctrl.remove = (req, res) => {
-
+ctrl.remove = async (req, res) => {
+    const image = await Image.findOne({filename: {$regex: req.params.image_id}});
+    if (image) {
+        await fs.unlink(path.resolve('./src/public/upload/'+ image.filename));
+        await Comment.deleteOne({image_id: image._id});
+        await image.remove();
+        res.json(true);
+    }
 };
 module.exports = ctrl;
