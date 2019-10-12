@@ -1,10 +1,15 @@
 const ctrl = {};
-
 const { Image } = require('../models');
+const sidebar = require('../helpers/sidebar');
+
 
 ctrl.index = async (req, res) => {
     const images = await Image.find().sort({timestamp: -1});
-    res.render('index', {images});
+    let viewmodel = {images:[]};
+    viewmodel.images = images;
+    viewmodel = await sidebar(viewmodel);
+    console.log(viewmodel.sidebar.comments[0].image)
+    res.render('index', viewmodel);
 };
 
-module.exports = ctrl;
+module.exports = ctrl; 

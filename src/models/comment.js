@@ -9,4 +9,12 @@ const CommentSchema = new Schema({
     comment: { type: String },
     timestamp: { type: Date, default: Date.now }
 });
+
+CommentSchema.virtual('image')
+.set(function(image){
+    this._image = image;
+})
+.get(function(){
+    return this._image;
+});
 module.exports = model('comment', CommentSchema); 

@@ -1,0 +1,18 @@
+{{#if sidebar.comments}}
+<div class="card mt-2">
+    <div class="card-header bg-dark text-white">
+        <h5><i class="far fa-comments"></i> Last Comments</h5>
+    </div>
+    <div class="card-body">
+        {{each sidebar.comments}}
+        <div class="row">
+            <div class="col">
+                <a href="/images/{{image.uniqueId}}">
+                    <img src="" alt="">
+                </a>
+            </div>
+        </div>
+        {{/each}} 
+    </div>
+</div>
+{{/if}}

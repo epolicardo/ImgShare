@@ -3,6 +3,7 @@ const ctrl = {};
 const { randomNumber } = require('../helpers/libs');
 const fs = require('fs-extra');
 const md5 = require('md5');
+const sidebar = require('../helpers/sidebar')
 
 //Esto es lo mismo que sin el index, ya que node por defecto, cuando importa, busca el index
 //const { Image } =  require('../models/index');
@@ -10,7 +11,7 @@ const { Image, Comment } = require('../models');
 
 //Controlador encargado de mostrar la vista inicial
 ctrl.index = async (req, res) => {
-    const viewModel = { image: {}, comments: {} };
+    let viewModel = { image: {}, comments: {} };
 
     const image = await Image.findOne({ filename: { $regex: req.params.image_id } });
     if (image) {
@@ -19,6 +20,7 @@ ctrl.index = async (req, res) => {
         await image.save();
         const comments = await Comment.find({ image_id: image._id })
         viewModel.comments = comments;
+        viewModel = await sidebar(viewModel);
         res.render('image', viewModel);
     } else {
         res.redirect('/');
