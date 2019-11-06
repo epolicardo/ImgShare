@@ -60,4 +60,3 @@ typings/
 # next.js build output
 .next
 src/public/upload/
-src/keys.js
