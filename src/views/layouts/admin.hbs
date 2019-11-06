@@ -15,7 +15,7 @@
     <!--FontAwesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css"
         integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
-    <title>Analía Bauer Pastelería</title>
+    <title>Analía Bauer Pastelería - Admin</title>
 </head>
 
 <body>
@@ -28,15 +28,17 @@
     </nav>
     <div class="container p-4">
         <div class="row">
+            <div class="col-md-4">
+                <li>Inicio</li>
+                <li>Carga Imagenes</li>
+                <li>Modera Comentarios</li>
+                <li>Administra Usuarios</li>
+                <li>Ayuda</li>
+            </div>
             <div class="col-md-8">
                 {{{body}}}
             </div>
-            <div class="col-md-4">
-                {{>popular }}
-                {{>comments }}
-                {{>stats }}
-                {{>upload }}
-            </div>
+            
         </div>
     </div>
     

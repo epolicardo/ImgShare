@@ -18,6 +18,7 @@ module.exports = app => {
     //Digo donde estan las vistas
     app.set('views', path.join(__dirname, '../views'));
     app.engine('.hbs', exphbs({
+        //Aca se puede cambiar el layout de paginas.
         defaultLayout: 'main',
         partialsDir: path.join(app.get('views'), 'partials'),
         layoutsDir: path.join(app.get('views'), 'layouts'),

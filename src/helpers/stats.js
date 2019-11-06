@@ -29,6 +29,8 @@ async function likesTotalCounter() {
 
 module.exports = async () => {
     const results = await Promise.all([
+        //TODO Validar si hay imagenes ya que aca se genera el error
+
         imageCounter(),
         commentCounter(),
         imageTotalViewsCounter(),

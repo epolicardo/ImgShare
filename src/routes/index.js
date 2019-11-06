@@ -3,6 +3,8 @@ const router = express.Router();
 
 const home = require('../controllers/home');
 const image = require('../controllers/image');
+const contact = require('../controllers/contact')
+
 
 module.exports = app => {
 
@@ -12,6 +14,7 @@ module.exports = app => {
     router.post('/images/:image_id/like', image.like);
     router.post('/images/:image_id/comment', image.comment);
     router.delete('/images/:image_id', image.remove);
+    router.get('/contact', contact.index);
     
     app.use(router);
 };
